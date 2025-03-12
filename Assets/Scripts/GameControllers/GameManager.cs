@@ -8,6 +8,18 @@ namespace CandyMatch.Controllers
     {
         public static GameManager Instance = null;
 
+        public delegate void GameStartEvent();
+        public static GameStartEvent OnGameStart;
+
+        public delegate void GameplayStartEvent();
+        public static GameplayStartEvent OnGameplayStart;
+
+        public delegate void GamePauseEvent();
+        public static GamePauseEvent OnGamePause;
+
+        public delegate void GameOverEvent();
+        public static GameOverEvent OnGameOver;
+
         [SerializeField] private int selectedLevelIndex = 0;
         public static int GetSelectedLevelIndex
         {
@@ -16,6 +28,12 @@ namespace CandyMatch.Controllers
                 return Instance.selectedLevelIndex;
             }
         }
+
+        private int score;
+        public int GetScore => score;
+
+        private int turnCount;
+        public int GetTurnCount => turnCount;
 
         public void Awake()
         {
@@ -27,10 +45,21 @@ namespace CandyMatch.Controllers
             {
                 Destroy(gameObject);
             }
-            DontDestroyOnLoad(gameObject);
         }
 
+        private void Start()
+        {
+            OnGameStart?.Invoke();
+        }
+        public void UpdateScore(int scoreValue)
+        {
+            score += scoreValue;
+        }
 
+        public void UpdateTurn(int turnCount)
+        {
+            this.turnCount += turnCount;
+        }
 
     }
 }

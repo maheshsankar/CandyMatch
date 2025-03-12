@@ -17,15 +17,27 @@ namespace CandyMatch.Controllers
         public delegate void SelectedCardEvent(CardView cardView);
         public static SelectedCardEvent OnCardSelected;
 
+        public delegate void TurnEvent();
+        public static TurnEvent OnTurn;
+
+        public delegate void CardMatchingEvent();
+        public static CardMatchingEvent OnCardMatch;
+
         private CardView currentSelectedCard;
         private CardView previousSelectedCard;
 
-        private void Start()
+        private void OnEnable()
+        {
+            GameManager.OnGameplayStart += OnGameplayStart;
+            
+        }
+
+        private void OnGameplayStart()
         {
             CustomCoroutiner.Start(InitLevel());
-
             OnCardSelected += OnCardSelectedUpdates;
         }
+
         
         private IEnumerator InitLevel()
         {
@@ -57,6 +69,8 @@ namespace CandyMatch.Controllers
             }
             else if(previousSelectedCard.GetCardID == currentSelectedCard.GetCardID)
             {
+                GameManager.Instance.UpdateScore(10);
+                OnCardMatch?.Invoke();
                 previousSelectedCard.DeleteCard(() =>
                 {
                     gridManager.GetGeneratedCards.Remove(previousSelectedCard);
@@ -69,6 +83,10 @@ namespace CandyMatch.Controllers
                     Destroy(currentSelectedCard);
                 });
             }
+
+            GameManager.Instance.UpdateTurn(1);
+            OnTurn?.Invoke();
+
             previousSelectedCard = null;
             currentSelectedCard = null;
         }
@@ -80,6 +98,7 @@ namespace CandyMatch.Controllers
 
         private void OnDisable()
         {
+            GameManager.OnGameplayStart -= OnGameplayStart;
             OnCardSelected -= OnCardSelectedUpdates;
         }
     }
