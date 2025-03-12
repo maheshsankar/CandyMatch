@@ -1,64 +1,64 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using TMPro;
 using UnityEngine.UI;
-using System;
 
-namespace CandyMatch.Controllers 
+namespace CandyMatch.Controllers
 {
-    public class GameOverCanvasView : MonoBehaviour
+    public class GamePauseCanvasView : MonoBehaviour
     {
         [SerializeField] private GameObject panelObj;
-        [SerializeField] private TextMeshProUGUI scoreValueText;
-        [SerializeField] private TextMeshProUGUI highScoreValueText;
-
         [SerializeField] private Button restartButton;
         [SerializeField] private Button homeButton;
+        [SerializeField] private Button closeButton;
 
         private void OnEnable()
         {
-            GameManager.OnGameOver += OnGameOver;
+            GameManager.OnGamePause += OnGamePause;
         }
 
         private void OnDisable()
         {
-            GameManager.OnGameOver -= OnGameOver;
+            GameManager.OnGamePause -= OnGamePause;
         }
 
-        private void OnGameOver()
+        private void OnGamePause()
         {
             panelObj.SetActive(true);
             SetButtonListeners();
-            RenderData();
-            SoundManager.PlaySound(SoundManager.SoundTypes.GAMEOVER);
-        }
-
-        private void RenderData() 
-        {
-            scoreValueText.text = GameManager.Instance.GetScore.ToString();
-            highScoreValueText.text = GameManager.Instance.GetHighScore.ToString();
         }
 
         private void SetButtonListeners()
         {
             restartButton.onClick.RemoveAllListeners();
-            restartButton.onClick.AddListener(OnRestartButtonClicked);
+            restartButton.onClick.AddListener(OnRestartClicked);
 
             homeButton.onClick.RemoveAllListeners();
             homeButton.onClick.AddListener(OnHomeButtonClicked);
+
+            closeButton.onClick.RemoveAllListeners();
+            closeButton.onClick.AddListener(OnCloseButtonClicked);
         }
 
-        private void OnRestartButtonClicked() 
+        private void OnRestartClicked()
         {
+            Time.timeScale = 1;
             panelObj.SetActive(false);
             GameManager.OnGameRestart?.Invoke();
         }
 
         private void OnHomeButtonClicked()
         {
+            Time.timeScale = 1;
             panelObj.SetActive(false);
             GameManager.OnGameStart?.Invoke();
+        }
+
+        private void OnCloseButtonClicked()
+        {
+            Time.timeScale = 1;
+            panelObj.SetActive(false);
         }
     }
 }

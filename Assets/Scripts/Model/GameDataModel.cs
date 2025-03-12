@@ -23,9 +23,10 @@ namespace CandyMatch.Model
     {
         public GameMode gameMode;
         public List<GameLayout> gameLayouts;
-        public List<Sprite> cardIcons;
+        public List<Card> cards;
     }
 
+    [System.Serializable]
     public class Card
     {
         public int cardID;

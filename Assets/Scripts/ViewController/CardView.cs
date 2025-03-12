@@ -23,6 +23,7 @@ namespace CandyMatch.Controllers
 
         public void RenderCard(Card card)
         {
+            isCardSelected = true;
             cardID = card.cardID;
 
             cardBGImage.sprite = cardFrontSprite;
@@ -33,6 +34,7 @@ namespace CandyMatch.Controllers
         public void ShowCard()
         {
             isCardSelected = true;
+            SoundManager.PlaySound(SoundManager.SoundTypes.CARD_FLIP);
             cardRectTr.DORotate(new Vector3(0, 90, 0), 0.2f).
                  OnComplete(() =>
                  {
@@ -56,9 +58,12 @@ namespace CandyMatch.Controllers
 
         }
 
-        public void DeleteCard(Action onComplete)
+        public void DeleteCard()
         {
-            cardRectTr.DOScale(0f, 0.1f).SetEase(Ease.OutFlash).OnComplete(() => onComplete());
+            cardRectTr.DOScale(0f, 0.1f).SetEase(Ease.OutFlash).OnComplete(() => 
+            {
+                GameplayManager.OnCardRemove?.Invoke(this);
+            });
         }
         
         public void OnPointerClick(PointerEventData eventData)

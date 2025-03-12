@@ -23,17 +23,27 @@ MonoBehaviour:
       columnCount: 4
     - rowCount: 2
       columnCount: 5
-    cardIcons:
-    - {fileID: 21300000, guid: bf038c25052e76243aaed289f6e860e1, type: 3}
-    - {fileID: 21300000, guid: 33b19088658a74c48a2fb95303cf7d60, type: 3}
-    - {fileID: 21300000, guid: 91e9e03e59e618f44903279608bd3e62, type: 3}
-    - {fileID: 21300000, guid: 18f395be3eb03b24dbcabc114ec65f2e, type: 3}
-    - {fileID: 21300000, guid: 2cd75818a0b14174e8557afcfe37496f, type: 3}
-    - {fileID: 21300000, guid: d429bec7f62441446ad405b0739e8a43, type: 3}
-    - {fileID: 21300000, guid: b8385623442d39f4b93db6c0adc370ec, type: 3}
-    - {fileID: 21300000, guid: 5b43309bcd63c81428ed91a6b6c2512d, type: 3}
-    - {fileID: 21300000, guid: f226947307f3d824dbe106d5a36c6091, type: 3}
-    - {fileID: 21300000, guid: acc9881c02871984db20650cddd22aee, type: 3}
+    cards:
+    - cardID: 1
+      cardIcon: {fileID: 21300000, guid: bf038c25052e76243aaed289f6e860e1, type: 3}
+    - cardID: 2
+      cardIcon: {fileID: 21300000, guid: 33b19088658a74c48a2fb95303cf7d60, type: 3}
+    - cardID: 3
+      cardIcon: {fileID: 21300000, guid: 91e9e03e59e618f44903279608bd3e62, type: 3}
+    - cardID: 4
+      cardIcon: {fileID: 21300000, guid: 18f395be3eb03b24dbcabc114ec65f2e, type: 3}
+    - cardID: 5
+      cardIcon: {fileID: 21300000, guid: 2cd75818a0b14174e8557afcfe37496f, type: 3}
+    - cardID: 6
+      cardIcon: {fileID: 21300000, guid: d429bec7f62441446ad405b0739e8a43, type: 3}
+    - cardID: 7
+      cardIcon: {fileID: 21300000, guid: b8385623442d39f4b93db6c0adc370ec, type: 3}
+    - cardID: 8
+      cardIcon: {fileID: 21300000, guid: 5b43309bcd63c81428ed91a6b6c2512d, type: 3}
+    - cardID: 9
+      cardIcon: {fileID: 21300000, guid: f226947307f3d824dbe106d5a36c6091, type: 3}
+    - cardID: 10
+      cardIcon: {fileID: 21300000, guid: acc9881c02871984db20650cddd22aee, type: 3}
   - gameMode: 1
     gameLayouts:
     - rowCount: 3
@@ -44,17 +54,27 @@ MonoBehaviour:
       columnCount: 6
     - rowCount: 4
       columnCount: 5
-    cardIcons:
-    - {fileID: 21300000, guid: bf038c25052e76243aaed289f6e860e1, type: 3}
-    - {fileID: 21300000, guid: 33b19088658a74c48a2fb95303cf7d60, type: 3}
-    - {fileID: 21300000, guid: 91e9e03e59e618f44903279608bd3e62, type: 3}
-    - {fileID: 21300000, guid: 18f395be3eb03b24dbcabc114ec65f2e, type: 3}
-    - {fileID: 21300000, guid: 2cd75818a0b14174e8557afcfe37496f, type: 3}
-    - {fileID: 21300000, guid: d429bec7f62441446ad405b0739e8a43, type: 3}
-    - {fileID: 21300000, guid: b8385623442d39f4b93db6c0adc370ec, type: 3}
-    - {fileID: 21300000, guid: 5b43309bcd63c81428ed91a6b6c2512d, type: 3}
-    - {fileID: 21300000, guid: f226947307f3d824dbe106d5a36c6091, type: 3}
-    - {fileID: 21300000, guid: acc9881c02871984db20650cddd22aee, type: 3}
+    cards:
+    - cardID: 1
+      cardIcon: {fileID: 21300000, guid: bf038c25052e76243aaed289f6e860e1, type: 3}
+    - cardID: 2
+      cardIcon: {fileID: 21300000, guid: 33b19088658a74c48a2fb95303cf7d60, type: 3}
+    - cardID: 3
+      cardIcon: {fileID: 21300000, guid: 91e9e03e59e618f44903279608bd3e62, type: 3}
+    - cardID: 4
+      cardIcon: {fileID: 21300000, guid: 18f395be3eb03b24dbcabc114ec65f2e, type: 3}
+    - cardID: 5
+      cardIcon: {fileID: 21300000, guid: 2cd75818a0b14174e8557afcfe37496f, type: 3}
+    - cardID: 6
+      cardIcon: {fileID: 21300000, guid: d429bec7f62441446ad405b0739e8a43, type: 3}
+    - cardID: 7
+      cardIcon: {fileID: 21300000, guid: b8385623442d39f4b93db6c0adc370ec, type: 3}
+    - cardID: 8
+      cardIcon: {fileID: 21300000, guid: 5b43309bcd63c81428ed91a6b6c2512d, type: 3}
+    - cardID: 9
+      cardIcon: {fileID: 21300000, guid: f226947307f3d824dbe106d5a36c6091, type: 3}
+    - cardID: 10
+      cardIcon: {fileID: 21300000, guid: acc9881c02871984db20650cddd22aee, type: 3}
   - gameMode: 2
     gameLayouts:
     - rowCount: 4
@@ -65,14 +85,24 @@ MonoBehaviour:
       columnCount: 6
     - rowCount: 3
       columnCount: 10
-    cardIcons:
-    - {fileID: 21300000, guid: bf038c25052e76243aaed289f6e860e1, type: 3}
-    - {fileID: 21300000, guid: 33b19088658a74c48a2fb95303cf7d60, type: 3}
-    - {fileID: 21300000, guid: 91e9e03e59e618f44903279608bd3e62, type: 3}
-    - {fileID: 21300000, guid: 18f395be3eb03b24dbcabc114ec65f2e, type: 3}
-    - {fileID: 21300000, guid: 2cd75818a0b14174e8557afcfe37496f, type: 3}
-    - {fileID: 21300000, guid: d429bec7f62441446ad405b0739e8a43, type: 3}
-    - {fileID: 21300000, guid: b8385623442d39f4b93db6c0adc370ec, type: 3}
-    - {fileID: 21300000, guid: 5b43309bcd63c81428ed91a6b6c2512d, type: 3}
-    - {fileID: 21300000, guid: f226947307f3d824dbe106d5a36c6091, type: 3}
-    - {fileID: 21300000, guid: acc9881c02871984db20650cddd22aee, type: 3}
+    cards:
+    - cardID: 1
+      cardIcon: {fileID: 21300000, guid: bf038c25052e76243aaed289f6e860e1, type: 3}
+    - cardID: 2
+      cardIcon: {fileID: 21300000, guid: 33b19088658a74c48a2fb95303cf7d60, type: 3}
+    - cardID: 3
+      cardIcon: {fileID: 21300000, guid: 91e9e03e59e618f44903279608bd3e62, type: 3}
+    - cardID: 4
+      cardIcon: {fileID: 21300000, guid: 18f395be3eb03b24dbcabc114ec65f2e, type: 3}
+    - cardID: 5
+      cardIcon: {fileID: 21300000, guid: 2cd75818a0b14174e8557afcfe37496f, type: 3}
+    - cardID: 6
+      cardIcon: {fileID: 21300000, guid: d429bec7f62441446ad405b0739e8a43, type: 3}
+    - cardID: 7
+      cardIcon: {fileID: 21300000, guid: b8385623442d39f4b93db6c0adc370ec, type: 3}
+    - cardID: 8
+      cardIcon: {fileID: 21300000, guid: 5b43309bcd63c81428ed91a6b6c2512d, type: 3}
+    - cardID: 9
+      cardIcon: {fileID: 21300000, guid: f226947307f3d824dbe106d5a36c6091, type: 3}
+    - cardID: 10
+      cardIcon: {fileID: 21300000, guid: acc9881c02871984db20650cddd22aee, type: 3}

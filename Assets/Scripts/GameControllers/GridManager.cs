@@ -7,6 +7,8 @@ using DG.Tweening;
 using CandyMatch.Utilities;
 using CandyMatch.Model;
 using Random = UnityEngine.Random;
+using System.Reflection;
+using System.Linq;
 
 namespace CandyMatch.Controllers 
 {
@@ -31,7 +33,6 @@ namespace CandyMatch.Controllers
         private void Init() 
         {
             containerBGImage.enabled = false;
-            generatedCards = new List<CardView>();
         }
 
         /// <summary>
@@ -79,43 +80,42 @@ namespace CandyMatch.Controllers
             containerBGImage.enabled = true;
         }
 
-        public void GenerateCardDatas(int rowCount, int columnCount, List<Sprite> cardIcons) 
+        public void GenerateCardDatas(int rowCount, int columnCount, List<Card> cards) 
         {
             cardDatas = new List<Card>();
+            int requiredCardCount = (rowCount * columnCount) / 2;
+            int randomIndex;
+            Card card;
 
-            List<Sprite> tempCardIcons = new List<Sprite>();
-
-            foreach (Sprite icon in cardIcons) 
+            List<Card> tempCards = new();
+            foreach (Card cardItem in cards)
             {
-                tempCardIcons.Add(icon);
+                tempCards.Add(cardItem);
             }
 
-            int requiredCardCount = (rowCount * columnCount) / 2;
-
-            for(int i = 0; i < requiredCardCount; i++)
+            for (int i = 0; i < requiredCardCount; i++)
             {
-                if(tempCardIcons.Count != 0)
+                if (tempCards.Count != 0)
                 {
-                    int randomIndex = Random.Range(0, tempCardIcons.Count);
-                    Card card = new Card();
-                    card.cardID = i;
-                    card.cardIcon = tempCardIcons[randomIndex];
+                    randomIndex = Random.Range(0, tempCards.Count);
+                    card = new Card();
+                    card.cardID = tempCards[randomIndex].cardID;
+                    card.cardIcon = tempCards[randomIndex].cardIcon;
 
-                    cardDatas.Add(card);
-                    cardDatas.Add(card);
+                    
 
-                    tempCardIcons.RemoveAt(randomIndex);
+                    tempCards.RemoveAt(randomIndex);
                 }
                 else
                 {
-                    int randomIndex = Random.Range(0, cardIcons.Count);
-                    Card card = new Card();
-                    card.cardID = i;
-                    card.cardIcon = cardIcons[randomIndex];
-
-                    cardDatas.Add(card);
-                    cardDatas.Add(card);
+                    randomIndex = Random.Range(0, cards.Count);
+                    card = new Card();
+                    card.cardID = cards[randomIndex].cardID;
+                    card.cardIcon = cards[randomIndex].cardIcon; ;
                 }
+
+                cardDatas.Add(card);
+                cardDatas.Add(card);
             }
             ShuffleGeneratedCards();
         }
@@ -135,7 +135,8 @@ namespace CandyMatch.Controllers
 
         public void GenerateCards()
         {
-            for(var i = 0; i < cardDatas.Count; i++)
+            generatedCards = new List<CardView>();
+            for (var i = 0; i < cardDatas.Count; i++)
             {
                 CreateCard(cardDatas[i], i);
             }
@@ -169,10 +170,36 @@ namespace CandyMatch.Controllers
 
         private void HideCards()
         {
+            if (generatedCards == null) return;
             for (int i = 0; i < generatedCards.Count; i++)
             {
                 generatedCards[i].HideCard();
             }
+        }
+
+        public void DestroyCard(CardView cardView) 
+        {
+            generatedCards.Remove(cardView);
+            Destroy(cardView.gameObject);
+        }
+
+        public void ClearCards()
+        {
+            if (generatedCards == null) return;
+
+            foreach (CardView cardView in generatedCards)
+            {
+                DestroyImmediate(cardView.gameObject);
+            }
+            generatedCards = null;
+        }
+
+        public void ClearGrid()
+        {
+            cardSize = 0;
+            gridPositionDatas = null;
+            ClearCards();
+            cardDatas = null;
         }
     }
 }

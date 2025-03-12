@@ -23,32 +23,58 @@ namespace CandyMatch.Controllers
         public delegate void CardMatchingEvent();
         public static CardMatchingEvent OnCardMatch;
 
+        public delegate void CardRemoveEvent(CardView cardView);
+        public static CardRemoveEvent OnCardRemove;
+
         private CardView currentSelectedCard;
         private CardView previousSelectedCard;
 
         private void OnEnable()
         {
+            GameManager.OnGameStart += OnGameStart;
             GameManager.OnGameplayStart += OnGameplayStart;
-            
+            GameManager.OnGameRestart += OnGameRestart;
+
+            OnCardRemove += OnCardRemoveUpdates;
+            OnCardSelected += OnCardSelectedUpdates;
+        }
+
+        private void OnGameStart()
+        {
+            GameManager.Instance.Reset();
+            gridManager.ClearGrid();
         }
 
         private void OnGameplayStart()
         {
-            CustomCoroutiner.Start(InitLevel());
-            OnCardSelected += OnCardSelectedUpdates;
+            InitLevel();
+        }
+
+        private void OnGameRestart() 
+        {
+            GameManager.Instance.Reset();
+            gridManager.ClearCards();
+            CustomCoroutiner.Start(StartGeneratingCards());
         }
 
         
-        private IEnumerator InitLevel()
+        private void InitLevel()
         {
-            GameLevelData gameLevelData = gameLevelController.GetSelectedGameLevelData(GameManager.GetSelectedLevelIndex);
+            GameLevelData gameLevelData = gameLevelController.GetSelectedGameLevelData(GameManager.Instance.GetSelectedLevelIndex);
             int randomLayoutIndex = Random.Range(0, gameLevelData.gameLayouts.Count);
             GameLayout gameLayout = gameLevelController.GetSelectedGameLayout(gameLevelData, randomLayoutIndex);
 
             gridManager.CreateGrid(gameLayout.rowCount, gameLayout.columnCount);
-            gridManager.GenerateCardDatas(gameLayout.rowCount, gameLayout.columnCount, gameLevelData.cardIcons);
-            yield return new WaitForSeconds(1);
+            gridManager.GenerateCardDatas(gameLayout.rowCount, gameLayout.columnCount, gameLevelData.cards);
 
+            CustomCoroutiner.Start(StartGeneratingCards());
+        }
+
+        private IEnumerator StartGeneratingCards()
+        {
+            currentSelectedCard = null;
+            previousSelectedCard = null;
+            yield return new WaitForSeconds(0.5f);
             gridManager.GenerateCards();
         }
 
@@ -64,6 +90,7 @@ namespace CandyMatch.Controllers
             
             if(previousSelectedCard.GetCardID != currentSelectedCard.GetCardID) 
             {
+                SoundManager.PlaySound(SoundManager.SoundTypes.CARD_MISMATCH);
                 previousSelectedCard.HideCard();
                 currentSelectedCard.HideCard();
             }
@@ -71,34 +98,34 @@ namespace CandyMatch.Controllers
             {
                 GameManager.Instance.UpdateScore(10);
                 OnCardMatch?.Invoke();
-                previousSelectedCard.DeleteCard(() =>
-                {
-                    gridManager.GetGeneratedCards.Remove(previousSelectedCard);
-                    Destroy(previousSelectedCard);
-                });
-
-                currentSelectedCard.DeleteCard(() =>
-                {
-                    gridManager.GetGeneratedCards.Remove(previousSelectedCard);
-                    Destroy(currentSelectedCard);
-                });
+                SoundManager.PlaySound(SoundManager.SoundTypes.CARD_MATCH);
+                previousSelectedCard.DeleteCard();
+                currentSelectedCard.DeleteCard();
             }
 
             GameManager.Instance.UpdateTurn(1);
             OnTurn?.Invoke();
-
             previousSelectedCard = null;
             currentSelectedCard = null;
         }
 
-        private void OnDestroy()
+        private void OnCardRemoveUpdates(CardView cardView) 
         {
-            OnCardSelected -= OnCardSelectedUpdates;
+            gridManager.DestroyCard(cardView);
+
+            if (gridManager.GetGeneratedCards.Count == 0)
+            {
+                GameManager.Instance.CheckAndUpdateHigScore();
+                GameManager.OnGameOver?.Invoke();
+            }
         }
 
         private void OnDisable()
         {
+            GameManager.OnGameStart -= OnGameStart;
             GameManager.OnGameplayStart -= OnGameplayStart;
+            GameManager.OnGameRestart += OnGameRestart;
+            OnCardRemove -= OnCardRemoveUpdates;
             OnCardSelected -= OnCardSelectedUpdates;
         }
     }
