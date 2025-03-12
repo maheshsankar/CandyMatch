@@ -141,7 +141,6 @@ namespace CandyMatch.Controllers
             }
 
             CustomCoroutiner.Start(SetCardsEntryAnimation());
-            Invoke(nameof(HideCards), 2f);
         }
 
         /// <summary>
@@ -163,8 +162,9 @@ namespace CandyMatch.Controllers
             for (int i = 0; i < generatedCards.Count; i++)
             {
                 generatedCards[i].GetCardRectTr.DOSizeDelta(Vector2.one * cardSize, 0.1f).SetEase(Ease.OutElastic);
-                yield return new WaitForSeconds(0.1f);
+                yield return new WaitForSeconds(0.05f);
             }
+            Invoke(nameof(HideCards), 2f);
         }
 
         private void HideCards()

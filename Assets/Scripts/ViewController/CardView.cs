@@ -4,6 +4,7 @@ using UnityEngine.EventSystems;
 using DG.Tweening;
 using System.Collections;
 using CandyMatch.Model;
+using System;
 
 namespace CandyMatch.Controllers 
 {
@@ -18,6 +19,7 @@ namespace CandyMatch.Controllers
 
         private bool isCardSelected = false;
         private int cardID;
+        public int GetCardID => cardID;
 
         public void RenderCard(Card card)
         {
@@ -26,6 +28,19 @@ namespace CandyMatch.Controllers
             cardBGImage.sprite = cardFrontSprite;
             cardIcon.sprite = card.cardIcon;
             cardIcon.enabled = true;
+        }
+
+        public void ShowCard()
+        {
+            isCardSelected = true;
+            cardRectTr.DORotate(new Vector3(0, 90, 0), 0.2f).
+                 OnComplete(() =>
+                 {
+                     cardBGImage.sprite = cardFrontSprite;
+                     cardIcon.enabled = true;
+                     cardRectTr.DORotate(new Vector3(0, 0, 0), 0.2f).
+                     OnComplete(() => GameplayManager.OnCardSelected?.Invoke(this));
+                 });
         }
 
         public void HideCard()
@@ -41,24 +56,20 @@ namespace CandyMatch.Controllers
 
         }
 
-        public void ShowCard()
+        public void DeleteCard(Action onComplete)
         {
-            isCardSelected = true;
-            cardRectTr.DORotate(new Vector3(0, 90, 0), 0.2f).
-                 OnComplete(() =>
-                 {
-                     cardBGImage.sprite = cardFrontSprite;
-                     cardIcon.enabled = true;
-                     cardRectTr.DORotate(new Vector3(0, 0, 0), 0.2f);
-                 });
+            cardRectTr.DOScale(0f, 0.1f).SetEase(Ease.OutFlash).OnComplete(() => onComplete());
         }
-
+        
         public void OnPointerClick(PointerEventData eventData)
         {
             if (eventData.pointerClick.GetComponent<CardView>() == null) return;
 
-            Debug.LogError(eventData.pointerClick.gameObject.name);
-            ShowCard();
+            if(!isCardSelected)
+            {
+                ShowCard();
+            }
+                 
         }
     }
 }

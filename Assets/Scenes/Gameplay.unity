@@ -708,7 +708,7 @@ GameObject:
   - component: {fileID: 1918636962}
   - component: {fileID: 1918636961}
   m_Layer: 0
-  m_Name: LevelManager
+  m_Name: GameplayManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -726,6 +726,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 75206b36ed58f944984e382e69bbdba1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gameLevelController: {fileID: 11400000, guid: d96daec186eb5b241953030ea649a8c7, type: 2}
   gridManager: {fileID: 1831752456}
 --- !u!4 &1918636962
 Transform:
@@ -855,7 +856,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 18eab405e73b38c4485aea67f27cbfdd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  levelHandler: {fileID: 11400000, guid: 4fde42809cf2836488d1e0ee6df6735e, type: 2}
   selectedLevelIndex: 0
 --- !u!4 &1977630959
 Transform:
