@@ -13,22 +13,34 @@ namespace CandyMatch.Controllers
         [SerializeField] private Button homeButton;
         [SerializeField] private Button closeButton;
 
+        /// <summary>
+        /// Default Unity OnEnable Method
+        /// </summary>
         private void OnEnable()
         {
             GameManager.OnGamePause += OnGamePause;
         }
 
+        /// <summary>
+        /// Default Unity OnDisable Method
+        /// </summary>
         private void OnDisable()
         {
             GameManager.OnGamePause -= OnGamePause;
         }
 
+        /// <summary>
+        /// Delegate Call back for Game Pause
+        /// </summary>
         private void OnGamePause()
         {
             panelObj.SetActive(true);
             SetButtonListeners();
         }
 
+        /// <summary>
+        /// Setting up all button listeners
+        /// </summary>
         private void SetButtonListeners()
         {
             restartButton.onClick.RemoveAllListeners();
@@ -41,6 +53,9 @@ namespace CandyMatch.Controllers
             closeButton.onClick.AddListener(OnCloseButtonClicked);
         }
 
+        /// <summary>
+        /// Restart Button Clicked
+        /// </summary>
         private void OnRestartClicked()
         {
             Time.timeScale = 1;
@@ -48,6 +63,9 @@ namespace CandyMatch.Controllers
             GameManager.OnGameRestart?.Invoke();
         }
 
+        /// <summary>
+        /// Home Button Clicked
+        /// </summary>
         private void OnHomeButtonClicked()
         {
             Time.timeScale = 1;
@@ -55,6 +73,9 @@ namespace CandyMatch.Controllers
             GameManager.OnGameStart?.Invoke();
         }
 
+        /// <summary>
+        /// Home Button Clicked
+        /// </summary>
         private void OnCloseButtonClicked()
         {
             Time.timeScale = 1;

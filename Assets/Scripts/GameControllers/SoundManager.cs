@@ -19,6 +19,9 @@ namespace CandyMatch.Controllers
             GAMEOVER
         }
 
+        /// <summary>
+        /// Default Unity Awake Method
+        /// </summary>
         public void Awake()
         {
             if (instance == null)
@@ -31,6 +34,10 @@ namespace CandyMatch.Controllers
             }
         }
 
+        /// <summary>
+        /// Play Sound based on selected audioclip
+        /// </summary>
+        /// <param name="soundTypes"></param>
         public static void PlaySound(SoundTypes soundTypes)
         {
             AudioClip audioClip = instance.soundClips.Find(x => x.name.Equals(instance.GetAudioFileName(soundTypes)));
@@ -41,6 +48,11 @@ namespace CandyMatch.Controllers
             }
         }
 
+        /// <summary>
+        /// Get Selected audioclip name for stored list
+        /// </summary>
+        /// <param name="soundTypes"></param>
+        /// <returns></returns>
         private string GetAudioFileName(SoundTypes soundTypes)
         {
             return soundTypes switch

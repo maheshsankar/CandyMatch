@@ -11,24 +11,27 @@ namespace CandyMatch.Controllers
 {
     public class GameplayManager : MonoBehaviour
     {
-        [SerializeField] private GameLevelController gameLevelController;
-        [SerializeField] private GridManager gridManager;
+        [SerializeField] private GameLevelController gameLevelController; //reference for game data
+        [SerializeField] private GridManager gridManager; //reference for grid manager
 
         public delegate void SelectedCardEvent(CardView cardView);
-        public static SelectedCardEvent OnCardSelected;
+        public static SelectedCardEvent OnCardSelected; //Delegate Event for Card Selection
 
         public delegate void TurnEvent();
-        public static TurnEvent OnTurn;
+        public static TurnEvent OnTurn; //Delegate Event for Turns
 
         public delegate void CardMatchingEvent();
-        public static CardMatchingEvent OnCardMatch;
+        public static CardMatchingEvent OnCardMatch; //Delegate Event for Card Matching Event
 
         public delegate void CardRemoveEvent(CardView cardView);
-        public static CardRemoveEvent OnCardRemove;
+        public static CardRemoveEvent OnCardRemove; //Delegate Event for Card removal
 
         private CardView currentSelectedCard;
         private CardView previousSelectedCard;
 
+        /// <summary>
+        /// Defult Unity OnEnable Method
+        /// </summary>
         private void OnEnable()
         {
             GameManager.OnGameStart += OnGameStart;
@@ -39,17 +42,26 @@ namespace CandyMatch.Controllers
             OnCardSelected += OnCardSelectedUpdates;
         }
 
+        /// <summary>
+        /// Delegate Callback for Game Start Event
+        /// </summary>
         private void OnGameStart()
         {
             GameManager.Instance.Reset();
             gridManager.ClearGrid();
         }
 
+        /// <summary>
+        /// Delegate Call back for Gameplay Start
+        /// </summary>
         private void OnGameplayStart()
         {
             InitLevel();
         }
 
+        /// <summary>
+        /// Delegate Call back for Game Restart
+        /// </summary>
         private void OnGameRestart() 
         {
             GameManager.Instance.Reset();
@@ -57,7 +69,9 @@ namespace CandyMatch.Controllers
             CustomCoroutiner.Start(StartGeneratingCards());
         }
 
-        
+        /// <summary>
+        /// Inititialising Level Data and Grid Data
+        /// </summary>
         private void InitLevel()
         {
             GameLevelData gameLevelData = gameLevelController.GetSelectedGameLevelData(GameManager.Instance.GetSelectedLevelIndex);
@@ -70,6 +84,10 @@ namespace CandyMatch.Controllers
             CustomCoroutiner.Start(StartGeneratingCards());
         }
 
+        /// <summary>
+        /// Generate Cards Based on Grid Positions with delay
+        /// </summary>
+        /// <returns></returns>
         private IEnumerator StartGeneratingCards()
         {
             currentSelectedCard = null;
@@ -78,6 +96,10 @@ namespace CandyMatch.Controllers
             gridManager.GenerateCards();
         }
 
+        /// <summary>
+        /// Delegate Call back for Card Selected Event
+        /// </summary>
+        /// <param name="cardView"></param>
         private void OnCardSelectedUpdates(CardView cardView)
         {
             currentSelectedCard = cardView;
@@ -109,6 +131,10 @@ namespace CandyMatch.Controllers
             currentSelectedCard = null;
         }
 
+        /// <summary>
+        /// Delegate Call back for Card Remove Event
+        /// </summary>
+        /// <param name="cardView"></param>
         private void OnCardRemoveUpdates(CardView cardView) 
         {
             gridManager.DestroyCard(cardView);
@@ -120,6 +146,9 @@ namespace CandyMatch.Controllers
             }
         }
 
+        /// <summary>
+        /// Default Unity OnDisable Method
+        /// </summary>
         private void OnDisable()
         {
             GameManager.OnGameStart -= OnGameStart;

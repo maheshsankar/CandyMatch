@@ -14,8 +14,8 @@ namespace CandyMatch.Controllers
 {
     public class GridManager : MonoBehaviour
     {
-        [SerializeField] private GameObject cardPrefab;
-        [SerializeField] private RectTransform containerRectTr;
+        [SerializeField] private GameObject cardPrefab; //reference for card
+        [SerializeField] private RectTransform containerRectTr; //reference for card parent
         [SerializeField] private Image containerBGImage;
 
         [SerializeField] private Vector2 padding = new Vector2(20, 20);
@@ -30,6 +30,9 @@ namespace CandyMatch.Controllers
 
         private List<Card> cardDatas;
 
+        /// <summary>
+        /// Initialise Card
+        /// </summary>
         private void Init() 
         {
             containerBGImage.enabled = false;
@@ -80,6 +83,12 @@ namespace CandyMatch.Controllers
             containerBGImage.enabled = true;
         }
 
+        /// <summary>
+        /// Create Card Data based on row and column count
+        /// </summary>
+        /// <param name="rowCount"></param>
+        /// <param name="columnCount"></param>
+        /// <param name="cards"></param>
         public void GenerateCardDatas(int rowCount, int columnCount, List<Card> cards) 
         {
             cardDatas = new List<Card>();
@@ -120,6 +129,9 @@ namespace CandyMatch.Controllers
             ShuffleGeneratedCards();
         }
 
+        /// <summary>
+        /// Randomise Cards
+        /// </summary>
         private void ShuffleGeneratedCards()
         {
             var count = cardDatas.Count;
@@ -133,6 +145,9 @@ namespace CandyMatch.Controllers
             }
         }
 
+        /// <summary>
+        /// Generate Cards based on shuffled sets
+        /// </summary>
         public void GenerateCards()
         {
             generatedCards = new List<CardView>();
@@ -158,6 +173,10 @@ namespace CandyMatch.Controllers
             generatedCards.Add(cardView);
         }
 
+        /// <summary>
+        /// Initial Cards animations
+        /// </summary>
+        /// <returns></returns>
         private IEnumerator SetCardsEntryAnimation()
         {
             for (int i = 0; i < generatedCards.Count; i++)
@@ -168,6 +187,9 @@ namespace CandyMatch.Controllers
             Invoke(nameof(HideCards), 2f);
         }
 
+        /// <summary>
+        /// Hide All cards
+        /// </summary>
         private void HideCards()
         {
             if (generatedCards == null) return;
@@ -177,12 +199,19 @@ namespace CandyMatch.Controllers
             }
         }
 
+        /// <summary>
+        /// Destrou Individual Cards
+        /// </summary>
+        /// <param name="cardView"></param>
         public void DestroyCard(CardView cardView) 
         {
             generatedCards.Remove(cardView);
             Destroy(cardView.gameObject);
         }
 
+        /// <summary>
+        /// Clear all Cards
+        /// </summary>
         public void ClearCards()
         {
             if (generatedCards == null) return;
@@ -194,6 +223,9 @@ namespace CandyMatch.Controllers
             generatedCards = null;
         }
 
+        /// <summary>
+        /// Clear Grid
+        /// </summary>
         public void ClearGrid()
         {
             cardSize = 0;

@@ -19,16 +19,25 @@ namespace CandyMatch.Controllers
         [SerializeField] private ToggleGroup modeSelectionToggleGroup;
         private List<Toggle> modeSelectionToggles;
 
+        /// <summary>
+        /// Default Unity OnEnable Method
+        /// </summary>
         private void OnEnable()
         {
             GameManager.OnGameStart += OnGameStart;
         }
 
+        /// <summary>
+        /// Default Unity OnDisable Method
+        /// </summary>
         private void OnDisable()
         {
             GameManager.OnGameStart -= OnGameStart;
         }
 
+        /// <summary>
+        /// Delegate call back for Game Start
+        /// </summary>
         private void OnGameStart()
         {
             panelObj.SetActive(true);
@@ -38,12 +47,18 @@ namespace CandyMatch.Controllers
             startButton.transform.DOShakeScale(1f, 0.2f, 5).SetLoops(-1);
         }
 
+        /// <summary>
+        /// Setting all button listeners
+        /// </summary>
         private void SetButtonListener()
         {
             startButton.onClick.RemoveAllListeners();
             startButton.onClick.AddListener(OnStartButtonClicked);
         }
 
+        /// <summary>
+        /// Setting up toggles and togglegroup
+        /// </summary>
         private void SetToggles()
         {
             modeSelectionToggles = modeSelectionToggleGroup.GetComponentsInChildren<Toggle>().ToList();
@@ -55,6 +70,10 @@ namespace CandyMatch.Controllers
             }
         }
 
+        /// <summary>
+        /// Event Listener call back for on toggle value change
+        /// </summary>
+        /// <param name="value"></param>
         private void OnToggleValueChanged(bool value)
         {
             if(value)
@@ -63,6 +82,10 @@ namespace CandyMatch.Controllers
             }
         }
 
+        /// <summary>
+        /// Getting the selected toggle index
+        /// </summary>
+        /// <returns></returns>
         public int GetSelectedToggleIndex()
         {
             Toggle selectedToggle = modeSelectionToggleGroup.ActiveToggles().FirstOrDefault();
@@ -75,6 +98,9 @@ namespace CandyMatch.Controllers
             return -1;
         }
 
+        /// <summary>
+        /// Display high Score
+        /// </summary>
         private void DsiplayHighScore()
         {
             if(GameManager.Instance.GetHighScore > 0)
@@ -84,12 +110,18 @@ namespace CandyMatch.Controllers
             }
         }
 
+        /// <summary>
+        /// Game Start button clicked
+        /// </summary>
         private void OnStartButtonClicked() 
         {
             GameManager.OnGameplayStart?.Invoke();
             Disable();
         }
 
+        /// <summary>
+        /// Disable panel object
+        /// </summary>
         public void Disable()
         {
             DOTween.Kill(startButton.transform);

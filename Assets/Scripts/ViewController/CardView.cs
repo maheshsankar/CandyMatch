@@ -21,6 +21,10 @@ namespace CandyMatch.Controllers
         private int cardID;
         public int GetCardID => cardID;
 
+        /// <summary>
+        /// Initialise Card and assigned Card Data
+        /// </summary>
+        /// <param name="card"></param>
         public void RenderCard(Card card)
         {
             isCardSelected = true;
@@ -31,6 +35,9 @@ namespace CandyMatch.Controllers
             cardIcon.enabled = true;
         }
 
+        /// <summary>
+        /// Display card with card icon
+        /// </summary>
         public void ShowCard()
         {
             isCardSelected = true;
@@ -45,6 +52,9 @@ namespace CandyMatch.Controllers
                  });
         }
 
+        /// <summary>
+        /// Hide card and hide card icon
+        /// </summary>
         public void HideCard()
         {
             isCardSelected = false;
@@ -58,6 +68,9 @@ namespace CandyMatch.Controllers
 
         }
 
+        /// <summary>
+        /// Delete card on animation complete
+        /// </summary>
         public void DeleteCard()
         {
             cardRectTr.DOScale(0f, 0.1f).SetEase(Ease.OutFlash).OnComplete(() => 
@@ -66,6 +79,10 @@ namespace CandyMatch.Controllers
             });
         }
         
+        /// <summary>
+        /// Pointer click event to check card is clicked
+        /// </summary>
+        /// <param name="eventData"></param>
         public void OnPointerClick(PointerEventData eventData)
         {
             if (eventData.pointerClick.GetComponent<CardView>() == null) return;

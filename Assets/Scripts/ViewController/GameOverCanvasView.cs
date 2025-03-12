@@ -16,16 +16,25 @@ namespace CandyMatch.Controllers
         [SerializeField] private Button restartButton;
         [SerializeField] private Button homeButton;
 
+        /// <summary>
+        /// Default Unity OnEnable Method
+        /// </summary>
         private void OnEnable()
         {
             GameManager.OnGameOver += OnGameOver;
         }
 
+        /// <summary>
+        /// Default Unity OnDisable Method
+        /// </summary>
         private void OnDisable()
         {
             GameManager.OnGameOver -= OnGameOver;
         }
 
+        /// <summary>
+        /// Delegate call back for Game Over
+        /// </summary>
         private void OnGameOver()
         {
             panelObj.SetActive(true);
@@ -34,12 +43,18 @@ namespace CandyMatch.Controllers
             SoundManager.PlaySound(SoundManager.SoundTypes.GAMEOVER);
         }
 
+        /// <summary>
+        /// Displaying the game over data
+        /// </summary>
         private void RenderData() 
         {
             scoreValueText.text = GameManager.Instance.GetScore.ToString();
             highScoreValueText.text = GameManager.Instance.GetHighScore.ToString();
         }
 
+        /// <summary>
+        /// Setting all button listeners
+        /// </summary>
         private void SetButtonListeners()
         {
             restartButton.onClick.RemoveAllListeners();
@@ -49,12 +64,17 @@ namespace CandyMatch.Controllers
             homeButton.onClick.AddListener(OnHomeButtonClicked);
         }
 
+        /// <summary>
+        /// Restart Button Click
+        /// </summary>
         private void OnRestartButtonClicked() 
         {
             panelObj.SetActive(false);
             GameManager.OnGameRestart?.Invoke();
         }
-
+        /// <summary>
+        /// Home Button Click
+        /// </summary>
         private void OnHomeButtonClicked()
         {
             panelObj.SetActive(false);
