@@ -1,0 +1,64 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!687078895 &4343727234628468602
+SpriteAtlas:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Buttons
+  m_EditorData:
+    serializedVersion: 2
+    textureSettings:
+      serializedVersion: 2
+      anisoLevel: 1
+      compressionQuality: 50
+      maxTextureSize: 2048
+      textureCompression: 0
+      filterMode: 1
+      generateMipMaps: 0
+      readable: 0
+      crunchedCompression: 0
+      sRGB: 1
+    platformSettings: []
+    packingSettings:
+      serializedVersion: 2
+      padding: 4
+      blockOffset: 1
+      allowAlphaSplitting: 0
+      enableRotation: 1
+      enableTightPacking: 1
+      enableAlphaDilation: 0
+    secondaryTextureSettings: {}
+    variantMultiplier: 1
+    packables:
+    - {fileID: 2800000, guid: 1985b07ed9f719e498b382bb9b60288d, type: 3}
+    - {fileID: 2800000, guid: 5fb6407d9279ab74585c866be1d8355b, type: 3}
+    - {fileID: 2800000, guid: 3347c7cbbea1d7044b80cc29fe38b9e8, type: 3}
+    - {fileID: 2800000, guid: 36a852707ab421d4fa799ac43831f81b, type: 3}
+    - {fileID: 2800000, guid: 2c90a2a2efb0f6941a9098dec5882a92, type: 3}
+    - {fileID: 2800000, guid: e53d4e5eb1bd87b428286f514d447e84, type: 3}
+    - {fileID: 2800000, guid: c8f1f436238683e47911d833207b09af, type: 3}
+    bindAsDefault: 1
+    isAtlasV2: 0
+    cachedData: {fileID: 0}
+  m_MasterAtlas: {fileID: 0}
+  m_PackedSprites:
+  - {fileID: 21300000, guid: 36a852707ab421d4fa799ac43831f81b, type: 3}
+  - {fileID: 21300000, guid: 2c90a2a2efb0f6941a9098dec5882a92, type: 3}
+  - {fileID: 21300000, guid: c8f1f436238683e47911d833207b09af, type: 3}
+  - {fileID: 21300000, guid: 3347c7cbbea1d7044b80cc29fe38b9e8, type: 3}
+  - {fileID: 21300000, guid: 5fb6407d9279ab74585c866be1d8355b, type: 3}
+  - {fileID: 21300000, guid: e53d4e5eb1bd87b428286f514d447e84, type: 3}
+  - {fileID: 21300000, guid: 1985b07ed9f719e498b382bb9b60288d, type: 3}
+  m_PackedSpriteNamesToIndex:
+  - Button_Rect_1
+  - Button_Rect_3
+  - Pause_Button
+  - RadioButton
+  - Button_Round_2
+  - Button_Round_4
+  - Button_Rect_2
+  m_RenderDataMap: {}
+  m_Tag: Buttons
+  m_IsVariant: 0
