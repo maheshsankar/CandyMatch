@@ -5,13 +5,13 @@ Candy Match Game is a fun and addictive match-3 puzzle game built in Unity. Play
 
 ## Technology Stack
 
-Engine: Unity
-Language: C#
+* Engine: Unity
+* Language: C#
 
 ## Installation & Setup
 
-Clone the repository: git clone https://github.com/maheshsankar/CandyMatch.git.
-Open the project in Unity 2021.3.45 (LTS).
-Screen Orientation - Potrait.
-Press Play in the Unity Editor to test the game.
-Build and export to your preferred platform.
+* Clone the repository: git clone https://github.com/maheshsankar/CandyMatch.git.
+* Open the project in Unity 2021.3.45 (LTS).
+* Screen Orientation - Potrait.
+* Press Play in the Unity Editor to test the game.
+* Build and export to your preferred platform.
