@@ -142,8 +142,14 @@ namespace CandyMatch.Controllers
             if (gridManager.GetGeneratedCards.Count == 0)
             {
                 GameManager.Instance.CheckAndUpdateHigScore();
-                GameManager.OnGameOver?.Invoke();
+                CustomCoroutiner.Start(ShowGameOverWithDelay());
             }
+        }
+
+        private IEnumerator ShowGameOverWithDelay()
+        {
+            yield return new WaitForSeconds(0.5f);
+            GameManager.OnGameOver?.Invoke();
         }
 
         /// <summary>
